@@ -1,0 +1,3 @@
+#redis_cache
+Django==3.2
+django-import-export

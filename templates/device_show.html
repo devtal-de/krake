@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} {{ dev["name"] }} &ndash; {% endblock %}
+{% block content %}
+<h1> {{dev["name"]}} </h1>
+<a href="{{ url_for('edit', dev_id=dev["id"]) }}"> bearbeiten </a>
+{% if man %}
+<div class="card">
+    <h5> Handb&uuml;cher </h5>
+    <ul>
+    {% for i in man %}
+        <li> <a href="{{i}}"> click </a> </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<div class="card">
+    <h5> Daten </h5>
+    <p> Ort: {{dev["location"]}} </p>
+    <p> Kommentar: {{ dev["comment"] }} </p>
+</div>
+<div class="card">
+    <h5> Audits </h5>
+    <p> Sticker-ID: {{ dev["sticker_id"] }} </p>
+    <ul>
+    {% for i in audit %}
+        {% if i["invalid"] -%}
+            <li> <strike> {{ i["created_at"] }} </strike> (ung&uuml;ltig) </li>
+        {% else -%}
+            <li> <span> {{ i["created_at"] }} </span> </li>
+        {% endif %}
+    {% endfor %} 
+    </ul>
+    <a href="{{ url_for('audit_add', dev_id=dev["id"]) }}">
+        neue Pr&uuml;fung
+    </a>
+</div>
+{% endblock %}

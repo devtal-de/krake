@@ -1,0 +1,8 @@
+a.del {
+	color: red;
+}
+div.card {
+	border: 1px solid #ccc;
+	border-radius: 16px;
+	padding: 0.5em 0.5em;
+}

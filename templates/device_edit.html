@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} {{ dev["name"] }} bearbeiten &ndash;  {% endblock %}
+{% block content %}
+<h1> {{dev["name"]}} </h1>
+<div class="card">
+    <h5> Handb&uuml;cher </h5>
+{% if man %}
+    <ul>
+    {% for i in man %}
+        <li>
+			<a href="{{i}}"> click </a>
+			<a href="" class="del"> remove </a>
+		</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+    <a> add new</a>
+</div>
+<div class="card">
+    <h5> Daten </h5>
+    <p> Name: <input type="text" name="name" value="{{ dev["name"] }}" /> </p>
+    <p> Ort: 
+        <input type="text" value="{{ dev["location"] }}" name="location" />
+    </p>
+    <p> Kommentar:
+        <textarea name="location"> {{ dev["comment"] }} </textarea>
+    </p>
+</div>
+<div class="card">
+    <h5> Audits </h5>
+    <p> Sticker-ID: {{ dev["sticker_id"] }} </p>
+    {% for i in audit %}
+        <li>
+            <span> {{ i["created_at"] }} </span>
+            <a href="{{ url_for('audit_invalidate', dev_id=dev['id'],
+                audit_id=i['id']) }}" class="del"> zur&uuml;ckrufen </a>
+        </li>
+    {% endfor %} 
+    </ul>
+    <a href="{{ url_for('audit_add', dev_id=dev["id"]) }}">
+        neue Pr&uuml;fung
+    </a>
+</div>
+{% endblock %}
